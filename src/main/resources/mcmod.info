@@ -1,0 +1,16 @@
+[
+	{
+		"modid": "tencore",
+		"name": "TenCore",
+		"description": "A core library for all of TakeTenGaming's Minecraft Mods",
+		"version": "${version}",
+		"mcversion": "${mcversion}",
+		"url": "",
+		"updateUrl": "",
+		"authorList": ["TakeTenGaming", "xlxAciDxlx"],
+		"credits": "",
+		"logoFile": "assets/tencore/logo.png",
+		"screenshots": [],
+		"dependencies": []
+	}
+]
