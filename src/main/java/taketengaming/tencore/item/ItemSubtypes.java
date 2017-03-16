@@ -22,8 +22,8 @@ public class ItemSubtypes extends net.minecraft.item.Item
 		super ();
 
 		name = NameUtil.getNameLegacy ( name );
-		setRegistryName ( name );
-		setUnlocalizedName ( name );
+		this.setRegistryName ( name );
+		this.setUnlocalizedName ( name );
 
 		this.setHasSubtypes ( true );
 		this.setSubTypeNames ( subTypeNames );
@@ -31,12 +31,12 @@ public class ItemSubtypes extends net.minecraft.item.Item
 
 	public ModelResourceLocation getModelResourceLocation ()
 	{
-		return new ModelResourceLocation ( getRegistryName (), "inventory" );
+		return new ModelResourceLocation ( this.getRegistryName (), "inventory" );
 	}
 
 	public ModelResourceLocation getModelResourceLocation ( int metadata )
 	{
-		return new ModelResourceLocation ( getRegistryName () + "_" + metadata, "inventory" );
+		return new ModelResourceLocation ( this.getRegistryName () + "_" + metadata, "inventory" );
 	}
 
 	/**
@@ -85,8 +85,7 @@ public class ItemSubtypes extends net.minecraft.item.Item
 			TenCore.logger.error ( "Unknown item: " + stack );
 		}
 
-		String fullName = "item." + name.replace ( " ", "_" ) + "_" + super.getUnlocalizedName ().replace ( "item.", "" );
-		return fullName;
+		return "item." + name.replace ( " ", "_" ) + "_" + super.getUnlocalizedName ().replace ( "item.", "" );
 	}
 
 	public String getUnlocalizedName ( int metadata )

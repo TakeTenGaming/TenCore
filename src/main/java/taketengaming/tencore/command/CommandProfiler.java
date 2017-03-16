@@ -16,13 +16,40 @@ import java.util.Objects;
 /**
  * Created by Acid on 11/18/2016.
  */
-public class Profiler extends CommandBase
+public class CommandProfiler extends CommandBase
 {
-	protected String name = "profiler";
+	public CommandProfiler ()
+	{
+		super ( "profiler" );
+	}
 
+	/**
+	 * Gets the usage string for the command.
+	 *
+	 * @param sender The ICommandSender who is requesting usage details
+	 */
+	@Override
+	public String getUsage ( ICommandSender sender )
+	{
+		return "/" + this.getName () + " <block ID/Item ID>";
+	}
+
+	/**
+	 * Callback for when the command is executed
+	 *
+	 * @param server The server instance
+	 * @param sender The sender who executed the command
+	 * @param args   The arguments that were passed
+	 */
 	@Override
 	public void execute ( MinecraftServer server, ICommandSender sender, String[] args ) throws CommandException
 	{
+		if ( args.length == 0 )
+		{
+			sender.sendMessage ( new TextComponentString ( "No arguments provided! Expected syntax: " + this.getUsage ( sender ) ) );
+			return;
+		}
+
 		String block = getBlockByText ( sender, args[ 0 ] ).toString ();
 
 		int blocksSearched = 0;
@@ -45,7 +72,7 @@ public class Profiler extends CommandBase
 				BlockPos newPosition = new BlockPos ( posX, newPosY, newPosX );
 				Block newBlock = sender.getEntityWorld ().getBlockState ( newPosition ).getBlock ();
 
-				if ( newBlock == Blocks.AIR || newBlock == Blocks.BEDROCK || newBlock == Blocks.WATER )
+				if ( newBlock == Blocks.AIR || newBlock == Blocks.BEDROCK || newBlock == Blocks.WATER || newBlock == Blocks.LAVA )
 				{
 					continue;
 				}

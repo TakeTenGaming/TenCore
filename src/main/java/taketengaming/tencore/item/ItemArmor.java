@@ -16,23 +16,23 @@ public class ItemArmor extends net.minecraft.item.ItemArmor
 		super ( material, 0, equipmentSlot );
 
 		name = NameUtil.getNameLegacy ( name );
-		setRegistryName ( name );
-		setUnlocalizedName ( name );
+		this.setRegistryName ( name );
+		this.setUnlocalizedName ( name );
 	}
 
 	public ModelResourceLocation getModelResourceLocation ()
 	{
-		return new ModelResourceLocation ( getRegistryName (), "inventory" );
+		return new ModelResourceLocation ( this.getRegistryName (), "inventory" );
 	}
 
 	public ModelResourceLocation getModelResourceLocation ( int metadata )
 	{
-		return new ModelResourceLocation ( getRegistryName () + "_" + metadata, "inventory" );
+		return new ModelResourceLocation ( this.getRegistryName () + "_" + metadata, "inventory" );
 	}
 
 	public ResourceLocation getResourceLocation ()
 	{
-		return getRegistryName ();
+		return this.getRegistryName ();
 	}
 
 	@Override

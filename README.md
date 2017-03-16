@@ -1,10 +1,10 @@
 # TenCore
-*TenCore* is a utility/library mod used in the majority of our Minecraft mods.
+*TenCore* is a utility/library mod used in our Minecraft mods.
 
-## Features
+### Features
 - Base utility classes for: Blocks, Ore Blocks, Items
 - Custom version checking system
 - Name utility class for compatibility between 1.10.2 and 1.11.2
 
-## Used By
+### Used By
 - [DatMod](http://minecraft.curseforge.com/projects/datmod/)

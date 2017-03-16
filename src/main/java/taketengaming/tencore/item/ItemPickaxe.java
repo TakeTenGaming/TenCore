@@ -13,17 +13,17 @@ public class ItemPickaxe extends net.minecraft.item.ItemPickaxe
 		super ( material );
 
 		name = NameUtil.getNameLegacy ( name );
-		setRegistryName ( name );
-		setUnlocalizedName ( name );
+		this.setRegistryName ( name );
+		this.setUnlocalizedName ( name );
 	}
 
 	public ModelResourceLocation getModelResourceLocation ()
 	{
-		return new ModelResourceLocation ( getRegistryName (), "inventory" );
+		return new ModelResourceLocation ( this.getRegistryName (), "inventory" );
 	}
 
 	public ModelResourceLocation getModelResourceLocation ( int metadata )
 	{
-		return new ModelResourceLocation ( getRegistryName () + "_" + metadata, "inventory" );
+		return new ModelResourceLocation ( this.getRegistryName () + "_" + metadata, "inventory" );
 	}
 }

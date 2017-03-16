@@ -1,29 +1,46 @@
 package taketengaming.tencore.block;
 
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.Explosion;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.items.ItemStackHandler;
 import taketengaming.tencore.NameUtil;
-import taketengaming.tencore.TenCore;
+import taketengaming.tencore.tileentity.TileEntityBase;
 
 /**
  * Created by Acid on 10/26/2016.
  */
 public class Block extends net.minecraft.block.Block
 {
-	public Block ( net.minecraft.block.material.Material materialIn, String name )
+	public Block ( Material materialIn, String name )
 	{
 		super ( materialIn );
 
-		name = name.toLowerCase ().replace ( " ", "" );
-		setRegistryName ( name );
-		setUnlocalizedName ( name );
+		name = NameUtil.getNameLegacy ( name );
+		this.setRegistryName ( name );
+		this.setUnlocalizedName ( name );
 
-		setHardness ( 1.5f );
-		setHarvestLevel ( "pickaxe", 2 );
-		setResistance ( 10.0f );
-		setSoundType ( SoundType.STONE );
+		this.setHardness ( 1.5f );
+		this.setHarvestLevel ( "pickaxe", 1 );
+		this.setResistance ( 10.0f );
+		this.setSoundType ( SoundType.STONE );
+	}
+
+	public Block ( Material materialIn )
+	{
+		super ( materialIn );
+
+		this.setHardness ( 1.5F );
+		this.setHarvestLevel ( "pickaxe", 1 );
+		this.setResistance ( 10.0f );
+		this.setSoundType ( SoundType.STONE );
 	}
 
 	public Block ( String name )
@@ -31,35 +48,60 @@ public class Block extends net.minecraft.block.Block
 		super ( net.minecraft.block.material.Material.ROCK );
 
 		name = NameUtil.getNameLegacy ( name );
-		setRegistryName ( name );
-		setUnlocalizedName ( name );
+		this.setRegistryName ( name );
+		this.setUnlocalizedName ( name );
 
-		setHardness ( 1.5f );
-		setHarvestLevel ( "pickaxe", 2 );
-		setResistance ( 10.0f );
-		setSoundType ( SoundType.STONE );
+		this.setHardness ( 1.5f );
+		this.setHarvestLevel ( "pickaxe", 1 );
+		this.setResistance ( 10.0f );
+		this.setSoundType ( SoundType.STONE );
 	}
 
+	/**
+	 * Called serverside after this block is replaced with another in Chunk, but before the Tile Entity is updated
+	 *
+	 * @param worldIn
+	 * @param pos
+	 * @param state
+	 */
 	@Override
-	public boolean canDropFromExplosion ( Explosion explosion )
+	public void breakBlock ( World worldIn, BlockPos pos, IBlockState state )
 	{
-		return false;
+		TileEntity tileEntity = worldIn.getTileEntity ( pos );
+
+		if ( tileEntity instanceof TileEntityBase )
+		{
+			ItemStackHandler inventory = ( ( TileEntityBase ) tileEntity ).itemStackHandler;
+
+			for ( int i = 0; i < inventory.getSlots (); ++i )
+			{
+				ItemStack itemstack = inventory.getStackInSlot ( i );
+				if ( itemstack == null )
+				{
+					continue;
+				}
+
+				InventoryHelper.spawnItemStack ( worldIn, pos.getX (), pos.getY (), pos.getZ (), itemstack );
+			}
+
+			worldIn.updateComparatorOutputLevel ( pos, this );
+		}
+
+		super.breakBlock ( worldIn, pos, state );
 	}
 
 	public ModelResourceLocation getModelResourceLocation ()
 	{
-		TenCore.logger.info ( "[Block] Model Resource: " + new ModelResourceLocation ( getRegistryName (), "inventory" ) );
-		return new ModelResourceLocation ( getRegistryName (), "inventory" );
+		return new ModelResourceLocation ( this.getRegistryName (), "inventory" );
 	}
 
 	public ModelResourceLocation getModelResourceLocation ( int metadata )
 	{
-		TenCore.logger.info ( "[Block] Model Resource (#" + metadata + "): " + new ModelResourceLocation ( getRegistryName () + "_" + metadata, "inventory" ) );
-		return new ModelResourceLocation ( getRegistryName () + "_" + metadata, "inventory" );
+		return new ModelResourceLocation ( this.getRegistryName () + "_" + metadata, "inventory" );
 	}
 
 	public ResourceLocation getResourceLocation ()
 	{
-		return getRegistryName ();
+		return this.getRegistryName ();
 	}
 }

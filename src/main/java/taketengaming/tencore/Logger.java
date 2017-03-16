@@ -9,9 +9,22 @@ public class Logger
 {
 	private org.apache.logging.log4j.Logger logger;
 
+	public Logger ()
+	{
+		this.logger = LogManager.getLogger ( "Logger" );
+	}
+
 	public Logger ( String name )
 	{
 		this.logger = LogManager.getLogger ( name );
+	}
+
+	public void debug ( String message )
+	{
+		if ( System.getProperty ( "debug" ) != null )
+		{
+			this.logger.debug ( message );
+		}
 	}
 
 	public void error ( String message )

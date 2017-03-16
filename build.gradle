@@ -1,19 +1,15 @@
 buildscript {
 	repositories {
 		jcenter()
-		// Minecraft Forge
 		maven { url = "http://files.minecraftforge.net/maven" }
 	}
 
-	dependencies {
-		// ForgeGradle
-		classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
-	}
+	dependencies { classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT' }
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = mc_version + "-" + mod_version
+version = mod_version
 group = "taketengaming.tencore"
 archivesBaseName = "TenCore"
 
@@ -29,9 +25,10 @@ minecraft {
 	mappings = mcp_mappings
 }
 
-/*repositories {}
-
-dependencies {}*/
+dependencies {
+	// DatMod
+	compile files("../../1.10.2/DatMod/build/libs/DatMod-1.10.2-${datmod_version}.jar")
+}
 
 processResources {
 	// this will ensure that this task is redone when the versions change.

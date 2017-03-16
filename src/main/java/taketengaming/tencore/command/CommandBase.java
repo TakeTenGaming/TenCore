@@ -7,7 +7,12 @@ import net.minecraft.command.ICommandSender;
  */
 public abstract class CommandBase extends net.minecraft.command.CommandBase
 {
-	protected String name;
+	private String name;
+
+	public CommandBase ( String name )
+	{
+		this.setName ( name );
+	}
 
 	/**
 	 * Gets the name of the command
@@ -16,6 +21,11 @@ public abstract class CommandBase extends net.minecraft.command.CommandBase
 	public String getName ()
 	{
 		return this.name;
+	}
+
+	public void addAlias ( String alias )
+	{
+		this.getAliases ().add ( alias );
 	}
 
 	/**
@@ -27,5 +37,10 @@ public abstract class CommandBase extends net.minecraft.command.CommandBase
 	public String getUsage ( ICommandSender sender )
 	{
 		return "/" + this.getName ();
+	}
+
+	private void setName ( String name )
+	{
+		this.name = name;
 	}
 }
