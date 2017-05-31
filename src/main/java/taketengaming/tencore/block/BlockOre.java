@@ -14,7 +14,7 @@ public class BlockOre extends net.minecraft.block.BlockOre
 	{
 		super ( color );
 
-		name = NameUtil.getNameLegacy ( name );
+		name = NameUtil.getName ( name );
 		this.setRegistryName ( name );
 		this.setUnlocalizedName ( name );
 
@@ -26,7 +26,7 @@ public class BlockOre extends net.minecraft.block.BlockOre
 	{
 		super ();
 
-		name = NameUtil.getNameLegacy ( name );
+		name = NameUtil.getName ( name );
 		this.setRegistryName ( name );
 		this.setUnlocalizedName ( name );
 
@@ -34,6 +34,7 @@ public class BlockOre extends net.minecraft.block.BlockOre
 		this.setHarvestLevel ( "pickaxe", 4 );
 	}
 
+	@SuppressWarnings( "ConstantConditions" )
 	public ModelResourceLocation getModelResourceLocation ()
 	{
 		return new ModelResourceLocation ( this.getRegistryName (), "inventory" );

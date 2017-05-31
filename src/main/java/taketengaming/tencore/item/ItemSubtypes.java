@@ -21,7 +21,7 @@ public class ItemSubtypes extends net.minecraft.item.Item
 	{
 		super ();
 
-		name = NameUtil.getNameLegacy ( name );
+		name = NameUtil.getName ( name );
 		this.setRegistryName ( name );
 		this.setUnlocalizedName ( name );
 
@@ -29,6 +29,7 @@ public class ItemSubtypes extends net.minecraft.item.Item
 		this.setSubTypeNames ( subTypeNames );
 	}
 
+	@SuppressWarnings( "ConstantConditions" )
 	public ModelResourceLocation getModelResourceLocation ()
 	{
 		return new ModelResourceLocation ( this.getRegistryName (), "inventory" );

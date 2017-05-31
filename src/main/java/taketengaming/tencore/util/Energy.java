@@ -8,12 +8,12 @@ public class Energy
 	/**
 	 * The maximum capacity the machine can hold
 	 */
-	public static final int CAPACITY = 10000;
+	public static final int CAPACITY = 100000;
 
 	/**
 	 * The maximum amount of energy that can be received
 	 */
-	public static final int MAX_RECEIVE = 200;
+	public static final int MAX_RECEIVE = 40;
 
 	/**
 	 * The maximum amount of energy that can be sent

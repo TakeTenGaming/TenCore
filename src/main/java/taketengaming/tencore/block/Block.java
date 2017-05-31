@@ -23,7 +23,7 @@ public class Block extends net.minecraft.block.Block
 	{
 		super ( materialIn );
 
-		name = NameUtil.getNameLegacy ( name );
+		name = NameUtil.getName ( name );
 		this.setRegistryName ( name );
 		this.setUnlocalizedName ( name );
 
@@ -45,9 +45,9 @@ public class Block extends net.minecraft.block.Block
 
 	public Block ( String name )
 	{
-		super ( net.minecraft.block.material.Material.ROCK );
+		super ( Material.ROCK );
 
-		name = NameUtil.getNameLegacy ( name );
+		name = NameUtil.getName ( name );
 		this.setRegistryName ( name );
 		this.setUnlocalizedName ( name );
 
@@ -76,7 +76,7 @@ public class Block extends net.minecraft.block.Block
 			for ( int i = 0; i < inventory.getSlots (); ++i )
 			{
 				ItemStack itemstack = inventory.getStackInSlot ( i );
-				if ( itemstack == null )
+				if ( itemstack.isEmpty () )
 				{
 					continue;
 				}
@@ -90,6 +90,7 @@ public class Block extends net.minecraft.block.Block
 		super.breakBlock ( worldIn, pos, state );
 	}
 
+	@SuppressWarnings( "ConstantConditions" )
 	public ModelResourceLocation getModelResourceLocation ()
 	{
 		return new ModelResourceLocation ( this.getRegistryName (), "inventory" );

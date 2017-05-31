@@ -92,30 +92,30 @@ public class BlockFacable extends Block
 			return;
 		}
 
-		IBlockState iblockstate = worldIn.getBlockState ( pos.north () );
-		IBlockState iblockstate1 = worldIn.getBlockState ( pos.south () );
-		IBlockState iblockstate2 = worldIn.getBlockState ( pos.west () );
-		IBlockState iblockstate3 = worldIn.getBlockState ( pos.east () );
-		EnumFacing enumfacing = state.getValue ( FACING );
+		IBlockState blockStateNorth = worldIn.getBlockState ( pos.north () );
+		IBlockState blockStateSouth = worldIn.getBlockState ( pos.south () );
+		IBlockState blockStateWest = worldIn.getBlockState ( pos.west () );
+		IBlockState blockStateEast = worldIn.getBlockState ( pos.east () );
+		EnumFacing enumFacing = state.getValue ( FACING );
 
-		if ( enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock () && !iblockstate1.isFullBlock () )
+		if ( enumFacing == EnumFacing.NORTH && blockStateNorth.isFullBlock () && !blockStateSouth.isFullBlock () )
 		{
-			enumfacing = EnumFacing.SOUTH;
+			enumFacing = EnumFacing.SOUTH;
 		}
-		else if ( enumfacing == EnumFacing.SOUTH && iblockstate1.isFullBlock () && !iblockstate.isFullBlock () )
+		else if ( enumFacing == EnumFacing.SOUTH && blockStateSouth.isFullBlock () && !blockStateNorth.isFullBlock () )
 		{
-			enumfacing = EnumFacing.NORTH;
+			enumFacing = EnumFacing.NORTH;
 		}
-		else if ( enumfacing == EnumFacing.WEST && iblockstate2.isFullBlock () && !iblockstate3.isFullBlock () )
+		else if ( enumFacing == EnumFacing.WEST && blockStateWest.isFullBlock () && !blockStateEast.isFullBlock () )
 		{
-			enumfacing = EnumFacing.EAST;
+			enumFacing = EnumFacing.EAST;
 		}
-		else if ( enumfacing == EnumFacing.EAST && iblockstate3.isFullBlock () && !iblockstate2.isFullBlock () )
+		else if ( enumFacing == EnumFacing.EAST && blockStateEast.isFullBlock () && !blockStateWest.isFullBlock () )
 		{
-			enumfacing = EnumFacing.WEST;
+			enumFacing = EnumFacing.WEST;
 		}
 
-		worldIn.setBlockState ( pos, state.withProperty ( FACING, enumfacing ), 2 );
+		worldIn.setBlockState ( pos, state.withProperty ( FACING, enumFacing ), 2 );
 	}
 
 	/**

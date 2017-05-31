@@ -12,11 +12,12 @@ public class ItemSword extends net.minecraft.item.ItemSword
 	{
 		super ( material );
 
-		name = NameUtil.getNameLegacy ( name );
+		name = NameUtil.getName ( name );
 		this.setRegistryName ( name );
 		this.setUnlocalizedName ( name );
 	}
 
+	@SuppressWarnings( "ConstantConditions" )
 	public ModelResourceLocation getModelResourceLocation ()
 	{
 		return new ModelResourceLocation ( this.getRegistryName (), "inventory" );

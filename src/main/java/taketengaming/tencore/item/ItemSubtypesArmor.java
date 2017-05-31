@@ -41,7 +41,7 @@ public class ItemSubtypesArmor extends ItemArmor
 				break;
 		}
 
-		name = NameUtil.getNameLegacy ( name );
+		name = NameUtil.getName ( name );
 		this.setRegistryName ( name );
 		this.setUnlocalizedName ( name );
 
@@ -49,6 +49,7 @@ public class ItemSubtypesArmor extends ItemArmor
 		this.setSubTypeNames ( subTypeNames );
 	}
 
+	@SuppressWarnings( "ConstantConditions" )
 	public ModelResourceLocation getModelResourceLocation ()
 	{
 		return new ModelResourceLocation ( this.getRegistryName (), "inventory" );

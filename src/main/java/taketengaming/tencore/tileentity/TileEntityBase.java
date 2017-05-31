@@ -13,8 +13,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import taketengaming.datmod.machine.generator.TileEntityGenerator;
 import taketengaming.datmod.machine.powerbank.TileEntityPowerBank;
 import taketengaming.tencore.energy.EnergyStorage;
-import taketengaming.tencore.recipes.FurnaceRecipes;
-import taketengaming.tencore.util.Machine;
 
 import java.util.ArrayList;
 
@@ -23,7 +21,7 @@ import java.util.ArrayList;
  */
 public class TileEntityBase extends TileEntity
 {
-	public static final int SIZE = 3;
+	public static int SIZE = 3;
 
 	public EnergyStorage energyStorageHandler = new EnergyStorage ();
 	public ItemStackHandler itemStackHandler = new ItemStackHandler ( SIZE )
@@ -31,17 +29,7 @@ public class TileEntityBase extends TileEntity
 		@Override
 		public ItemStack insertItem ( int slot, ItemStack stack, boolean simulate )
 		{
-			if ( slot == 0 ) // Input
-			{
-				if ( !Machine.isItemValidFuel ( stack ) || FurnaceRecipes.getInstance ().getRecipe ( stack ) == null )
-				{
-					return null;
-				}
-			}
-			else if ( slot == 1 ) // Output
-			{
-			}
-
+			// TODO: Figure out a way to check if an item can be inserted
 			return super.insertItem ( slot, stack, simulate );
 		}
 

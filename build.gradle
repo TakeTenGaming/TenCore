@@ -8,6 +8,7 @@ buildscript {
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'maven-publish'
 
 version = mod_version
 group = "taketengaming.tencore"
@@ -22,12 +23,30 @@ compileJava {
 minecraft {
 	version = mc_version + "-" + forge_version
 	runDir = "run"
+	makeObfSourceJar = true
+	useDepAts = true
 	mappings = mcp_mappings
+}
+
+task deobfJar(type: Jar) {
+	from sourceSets.main.output
+	classifier = 'deobf'
+}
+tasks.build.dependsOn('deobfJar')
+tasks.build.dependsOn('generatePomFileForMavenJavaPublication')
+tasks.build.dependsOn('publishToMavenLocal')
+
+repositories {
+	// Local Maven
+	mavenLocal()
+
+	// JustEnoughItems
+	maven { url = "http://dvs1.progwml6.com/files/maven" }
 }
 
 dependencies {
 	// DatMod
-	compile files("../../1.10.2/DatMod/build/libs/DatMod-1.10.2-${datmod_version}.jar")
+	deobfCompile "taketengaming.datmod:DatMod:" + mc_version + "-" + datmod_version
 }
 
 processResources {
@@ -46,5 +65,17 @@ processResources {
 	// copy everything else, thats not the mcmod.info
 	from(sourceSets.main.resources.srcDirs) {
 		exclude 'mcmod.info'
+	}
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+
+			artifact sourceJar {
+				classifier "sources"
+			}
+		}
 	}
 }
